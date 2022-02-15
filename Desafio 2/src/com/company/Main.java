@@ -1,15 +1,33 @@
 package com.company;
 import java.util.Scanner;
+
+
+
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
         Scanner scanner = new Scanner(System.in);
         String senha = scanner.nextLine();
-        boolean hasUpper, hasLower, hasSpecial=false;
+        String special="!@#$%^&*()-+";
+        //contagem de digitos faltando
+        int faltas =4;
+        boolean hasDigit =false,hasUppercase=false, hasLowercase=false, hasSpecial=false;
+        if (senha.matches(".*[0-9].*")){hasDigit=true;faltas--;}
+        if (senha.matches(".*[A-Z].*")){hasLowercase=true;faltas--;}
+        if (senha.matches(".*[a-z].*")){hasUppercase=true;faltas--;}
+        if (senha.matches(special)){hasSpecial=true;faltas--;}
 
+        //conferir se a senha é valida
+        if (senha.length()>=6 && hasDigit && hasUppercase && hasSpecial && hasLowercase){
+        System.out.println("Senha é valida");}
+        //caso falte no minimo 3 letras
+        else if (6-senha.length()>3){
+            System.out.println(6-senha.length());
+        }else {System.out.println(faltas);}
 
     }
+
 }
 
 
